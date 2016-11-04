@@ -1,3 +1,7 @@
 [submodule "extlibs/CubeMapGen"]
 	path = extlibs/CubeMapGen
 	url = https://github.com/gscept/CubeMapGen.git
+[submodule "nebula-trifid"]
+	path = nebula-trifid
+	url = https://github.com/gscept/nebula-trifid.git
+	branch = toolkit
