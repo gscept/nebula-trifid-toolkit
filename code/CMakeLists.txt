@@ -1,0 +1,2 @@
+add_subdirectory(toolkit)
+add_subdirectory(qttoolkit)

@@ -1,0 +1,3 @@
+[submodule "extlibs/CubeMapGen"]
+	path = extlibs/CubeMapGen
+	url = https://github.com/gscept/CubeMapGen.git

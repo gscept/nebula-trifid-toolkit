@@ -1,0 +1,47 @@
+#-------------------------------------------------------------------------------
+# gamebatcher
+#-------------------------------------------------------------------------------
+
+FILE(GLOB SRC "*.cc")
+FILE(GLOB HEAD "*.h")
+LIST(APPEND SRCS ${SRC} ${HEAD})
+SOURCE_GROUP("gamebatcher" FILES ${SRCS})
+
+set(PCH_files	
+    ../stdneb.cc
+)
+SOURCE_GROUP("Precompiled" FILES ${PCH_files})
+
+LIST(APPEND ALLSRCS ${SRCS} ${SRCSSPLITTER} ${PCH_files})
+
+ADD_EXECUTABLE(gamebatcher3 ${ALLSRCS} ${SOURCES_NIDLS})
+
+SET_TARGET_PROPERTIES(gamebatcher3 PROPERTIES FOLDER "N3SDK/Toolkit")
+
+N_SET_COMPILER_DEFAULTS(gamebatcher3)
+N_SET_EXE_LINKER_DEFAULTS(gamebatcher3)
+N_SET_EXE_SUBSYSTEM(gamebatcher3 Console)
+IF(N_USE_PRECOMPILED_HEADERS)
+	N_SET_PCH(gamebatcher3 stdneb.h stdneb.cc ../)
+ENDIF()
+ADD_DEPENDENCIES(gamebatcher3 toolkitutil )
+TARGET_LINK_LIBRARIES(gamebatcher3 PUBLIC toolkitutil )
+
+
+ADD_LIBRARY(gamebatch MODULE ${ALLSRCS} ${SOURCES_NIDLS})
+SET_TARGET_PROPERTIES(gamebatch PROPERTIES FOLDER "N3SDK/Toolkit")
+
+N_SET_EXE_LINKER_DEFAULTS(gamebatch)
+
+N_SET_EXE_SUBSYSTEM(gamebatch Console)
+IF(N_USE_PRECOMPILED_HEADERS)
+	N_SET_PCH(gamebatch stdneb.h stdneb.cc ../)
+ENDIF()
+ADD_DEPENDENCIES(gamebatch toolkitutil )
+N_SET_COMPILER_DEFAULTS(gamebatch)
+TARGET_LINK_LIBRARIES(gamebatch PUBLIC toolkitutil )
+SET_TARGET_PROPERTIES(gamebatch PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PROJECTBINDIR})
+SET_TARGET_PROPERTIES(gamebatch PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELEASE ${PROJECTBINDIR})
+SET_TARGET_PROPERTIES(gamebatch PROPERTIES LIBRARY_OUTPUT_DIRECTORY_DEBUG ${PROJECTBINDIR})
+SET_TARGET_PROPERTIES(gamebatch PROPERTIES LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${PROJECTBINDIR})
+SET_TARGET_PROPERTIES(gamebatch PROPERTIES LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${PROJECTBINDIR})
